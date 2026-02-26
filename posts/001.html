@@ -1,1 +1,291 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>記事タイトル - 広野文治のホームページ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #c0c0c0;
+      --surface: #d4d0c8;
+      --border-light: #ffffff;
+      --border-dark: #808080;
+      --border-darker: #404040;
+      --accent: #000080;
+      --text: #000000;
+      --link: #0000ee;
+    }
 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', 'MS Gothic', monospace;
+      font-size: 13px;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .raised {
+      border: 2px solid;
+      border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+    }
+    .sunken {
+      border: 2px solid;
+      border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+    }
+
+    .page {
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* MARQUEE */
+    .marquee-bar {
+      background: #000080;
+      color: #ffff00;
+      padding: 5px 0;
+      overflow: hidden;
+    }
+    .marquee-inner {
+      display: inline-block;
+      white-space: nowrap;
+      font-family: 'VT323', monospace;
+      font-size: 17px;
+      letter-spacing: 2px;
+      animation: marquee 18s linear infinite;
+    }
+    @keyframes marquee {
+      from { transform: translateX(100vw); }
+      to   { transform: translateX(-100%); }
+    }
+
+    /* SITE HEADER */
+    .site-header {
+      background: white;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .site-title {
+      font-family: 'VT323', monospace;
+      font-size: clamp(18px, 4vw, 28px);
+      color: #000080;
+      text-shadow: 1px 1px 0 #808080;
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+    .site-nav { display: flex; gap: 4px; flex-wrap: wrap; }
+    .nav-link {
+      padding: 3px 10px;
+      background: var(--surface);
+      border: 2px solid;
+      border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+      text-decoration: none;
+      color: var(--link);
+      font-size: 12px;
+    }
+    .nav-link:hover {
+      background: #000080;
+      color: white;
+      border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+    }
+    .nav-link:active {
+      border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+    }
+
+    /* ARTICLE */
+    .article {
+      background: white;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .article-header {
+      border-bottom: 2px solid #000080;
+      padding-bottom: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .article-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #000080;
+    }
+    .article-date {
+      font-size: 11px;
+      color: #808080;
+    }
+
+    /* 本文 */
+    .article-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      line-height: 1.9;
+    }
+    .article-body p {
+      font-size: 13px;
+    }
+
+    /* 画像 */
+    .article-img {
+      max-width: 100%;
+      border: 2px solid;
+      border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+      display: block;
+    }
+    .article-img-caption {
+      font-size: 11px;
+      color: #808080;
+      margin-top: 4px;
+      text-align: center;
+    }
+    .img-block {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    /* 画像を右や左に回り込ませたい場合 */
+    .img-block.right {
+      float: right;
+      margin: 0 0 10px 14px;
+      max-width: 260px;
+    }
+    .img-block.left {
+      float: left;
+      margin: 0 14px 10px 0;
+      max-width: 260px;
+    }
+    .clearfix::after { content: ''; display: block; clear: both; }
+
+    /* 区切り線 */
+    hr.retro {
+      border: none;
+      border-top: 2px solid var(--border-darker);
+      border-bottom: 1px solid var(--border-light);
+      margin: 2px 0;
+    }
+
+    /* 戻るボタン */
+    .back-link {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--surface);
+      border: 2px solid;
+      border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+      text-decoration: none;
+      color: var(--link);
+      font-size: 12px;
+    }
+    .back-link:hover { background: #000080; color: white; }
+    .back-link:active {
+      border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--surface);
+      padding: 10px;
+      text-align: center;
+      font-size: 11px;
+      color: #808080;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .page { padding: 8px; gap: 8px; }
+      .img-block.right, .img-block.left {
+        float: none;
+        margin: 0;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- サイトヘッダー -->
+  <div class="site-header sunken">
+    <a class="site-title" href="../index.html">広野文治のホームページ</a>
+    <nav class="site-nav">
+      <a class="nav-link" href="../index.html">トップ</a>
+      <a class="nav-link" href="../blog.html">ブログ</a>
+    </nav>
+  </div>
+
+  <!-- 記事本文 -->
+  <div class="article sunken">
+    <div class="article-header">
+      <!-- ↓ タイトルと日付を書き換える -->
+      <div class="article-title">記事タイトルをここに書く</div>
+      <div class="article-date">2026-02-26</div>
+    </div>
+
+    <div class="article-body clearfix">
+
+      <!-- ===== ここから本文を書く ===== -->
+
+      <p>本文をここに書きます。改行したいときは &lt;p&gt; タグを使います。</p>
+
+      <!-- 画像（右寄せ） -->
+      <!--
+      <div class="img-block right">
+        <img class="article-img" src="../images/ファイル名.jpg" alt="画像の説明">
+        <div class="article-img-caption">キャプション（任意）</div>
+      </div>
+      -->
+
+      <p>画像を入れたい場合は上のコメントを外して使ってください。</p>
+
+      <!-- 画像（左寄せ） -->
+      <!--
+      <div class="img-block left">
+        <img class="article-img" src="../images/ファイル名.jpg" alt="画像の説明">
+        <div class="article-img-caption">キャプション（任意）</div>
+      </div>
+      -->
+
+      <!-- 画像（中央・大きめ） -->
+      <!--
+      <div class="img-block">
+        <img class="article-img" src="../images/ファイル名.jpg" alt="画像の説明">
+        <div class="article-img-caption">キャプション（任意）</div>
+      </div>
+      -->
+
+      <!-- ===== ここまで ===== -->
+
+    </div>
+  </div>
+
+  <!-- 戻るボタン -->
+  <div>
+    <a class="back-link" href="../blog.html">← ブログ一覧に戻る</a>
+  </div>
+
+  <hr class="retro">
+
+  <!-- フッター -->
+  <div class="footer raised">
+    <div>© 2026 広野文治. All Rights Reserved.</div>
+  </div>
+
+</div>
+
+</body>
+</html>
