@@ -44,6 +44,8 @@
       flex-direction: column;
       gap: 10px;
     }
+
+    /* MARQUEE */
     .marquee-bar {
       background: #000080;
       color: #ffff00;
@@ -62,6 +64,8 @@
       from { transform: translateX(100vw); }
       to   { transform: translateX(-100%); }
     }
+
+    /* HERO */
     .hero {
       background: white;
       padding: 24px 16px;
@@ -104,13 +108,19 @@
     @keyframes blink {
       0%,100%{opacity:1} 50%{opacity:0}
     }
+
+    /* TWO-COLUMN */
     .two-col {
       display: grid;
       grid-template-columns: 190px 1fr;
       gap: 10px;
       align-items: start;
     }
+
+    /* SIDEBAR */
     .sidebar { display: flex; flex-direction: column; gap: 8px; }
+
+    /* PANEL */
     .panel { background: var(--surface); }
     .panel-title {
       background: #000080;
@@ -125,6 +135,8 @@
       flex-direction: column;
       gap: 4px;
     }
+
+    /* MENU */
     .menu-item {
       display: flex; align-items: center; gap: 6px;
       padding: 4px 6px;
@@ -135,6 +147,8 @@
     .menu-item::before { content: '▶'; font-size: 8px; color: #808080; }
     .menu-item:hover { background: #000080; color: white; }
     .menu-item:hover::before { color: #ffff00; }
+
+    /* MAIN COL */
     .main-col { display: flex; flex-direction: column; gap: 8px; }
 
     .content-block {
@@ -171,6 +185,8 @@
       border-bottom: 1px solid var(--border-light);
       margin: 2px 0;
     }
+
+    /* FOOTER */
     .footer {
       background: var(--surface);
       padding: 10px;
@@ -203,6 +219,8 @@
       border: 1px solid;
       border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
     }
+
+    /* RESPONSIVE */
     @media (max-width: 600px) {
       .page { padding: 8px; gap: 8px; }
 
@@ -230,6 +248,7 @@
 
       .best-viewed { flex-direction: column; gap: 6px; }
     }
+    /* BLOG CARDS */
     .blog-card {
       display: flex;
       gap: 10px;
@@ -270,16 +289,22 @@
 <body>
 
 <div class="page">
+
+  <!-- Marquee -->
   <div class="marquee-bar raised">
     <div class="marquee-inner">
-      ★ ようこそ！広野文治のホームページへ！ ★ &nbsp;&nbsp;&nbsp; WELCOME TO HIRONO BUNJI'S HOMEPAGE &nbsp;&nbsp;&nbsp; ★ ようこそ！広野文治のホームページへ！ ★ &nbsp;&nbsp;&nbsp; WELCOME TO HIRONO BUNJI NO HOMEPAGE &nbsp;&nbsp;&nbsp;
+      ★ ようこそ！広野文治のホームページへ！ ★ &nbsp;&nbsp;&nbsp; WELCOME TO HIRONO BUNJI'S HOMEPAGE &nbsp;&nbsp;&nbsp; ★ ようこそ！広野文治のホームページへ！ ★ &nbsp;&nbsp;&nbsp; WELCOME TO HIRONO BUNJI'S HOMEPAGE &nbsp;&nbsp;&nbsp;
     </div>
   </div>
+
+  <!-- Hero -->
   <div class="hero sunken">
 
     <div class="hero-title">広野文治のホームページ</div>
 
   </div>
+
+  <!-- Two column -->
   <div class="two-col">
 
     <div class="sidebar">
@@ -287,7 +312,7 @@
         <div class="panel-title">メニュー</div>
         <div class="panel-body menu-body">
           <a class="menu-item" href="#">自己紹介</a>
-          <a class="menu-item" href="blog.html">ブログ</a>
+          <a class="menu-item" href="#">ブログ</a>
         </div>
       </div>
 
@@ -360,6 +385,7 @@
         container.innerHTML = '<p class="blog-empty">まだ記事がありません。</p>';
         return;
       }
+      // 最新3件だけ表示
       const recent = posts.slice(0, 3);
       container.innerHTML = recent.map(post => `
         <a class="blog-card" href="${post.url}">
