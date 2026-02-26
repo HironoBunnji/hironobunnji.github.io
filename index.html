@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>広野文治のホームページ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #c0c0c0;
+      --surface: #d4d0c8;
+      --border-light: #ffffff;
+      --border-dark: #808080;
+      --border-darker: #404040;
+      --accent: #000080;
+      --text: #000000;
+      --link: #0000ee;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', 'MS Gothic', monospace;
+      font-size: 13px;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .raised {
+      border: 2px solid;
+      border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+    }
+    .sunken {
+      border: 2px solid;
+      border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+    }
+
+    .page {
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* MARQUEE */
+    .marquee-bar {
+      background: #000080;
+      color: #ffff00;
+      padding: 5px 0;
+      overflow: hidden;
+    }
+    .marquee-inner {
+      display: inline-block;
+      white-space: nowrap;
+      font-family: 'VT323', monospace;
+      font-size: 17px;
+      letter-spacing: 2px;
+      animation: marquee 18s linear infinite;
+    }
+    @keyframes marquee {
+      from { transform: translateX(100vw); }
+      to   { transform: translateX(-100%); }
+    }
+
+    /* HERO */
+    .hero {
+      background: white;
+      padding: 24px 16px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-title {
+      font-family: 'VT323', monospace;
+      font-size: clamp(22px, 5vw, 40px);
+      color: #000080;
+      text-shadow: 2px 2px 0 #808080;
+      letter-spacing: 4px;
+    }
+    .hero-stars { display: flex; gap: 6px; }
+    .star {
+      width: 18px; height: 18px;
+      background: #ffcc00;
+      clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+      animation: twinkle 1.5s ease-in-out infinite;
+    }
+    .star:nth-child(2){animation-delay:.3s}
+    .star:nth-child(3){animation-delay:.6s}
+    .star:nth-child(4){animation-delay:.9s}
+    .star:nth-child(5){animation-delay:1.2s}
+    @keyframes twinkle {
+      0%,100%{opacity:1;transform:scale(1)}
+      50%{opacity:.4;transform:scale(.8)}
+    }
+    .under-construction {
+      background: #ffff00;
+      border: 2px solid black;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: bold;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      0%,100%{opacity:1} 50%{opacity:0}
+    }
+
+    /* TWO-COLUMN */
+    .two-col {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    /* SIDEBAR */
+    .sidebar { display: flex; flex-direction: column; gap: 8px; }
+
+    /* PANEL */
+    .panel { background: var(--surface); }
+    .panel-title {
+      background: #000080;
+      color: white;
+      padding: 3px 8px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .panel-body {
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    /* MENU */
+    .menu-item {
+      display: flex; align-items: center; gap: 6px;
+      padding: 4px 6px;
+      text-decoration: none;
+      color: var(--link);
+      font-size: 13px;
+    }
+    .menu-item::before { content: '▶'; font-size: 8px; color: #808080; }
+    .menu-item:hover { background: #000080; color: white; }
+    .menu-item:hover::before { color: #ffff00; }
+
+    /* MAIN COL */
+    .main-col { display: flex; flex-direction: column; gap: 8px; }
+
+    .content-block {
+      background: white;
+      padding: 10px 14px;
+      min-height: 80px;
+    }
+    .content-block h3 {
+      font-size: 13px;
+      color: #000080;
+      border-bottom: 1px solid #000080;
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
+
+    .content-block p {
+      font-size: 13px;
+      line-height: 1.8;
+    }
+      background: #e8e8e8;
+      border: 1px dashed #808080;
+      height: 60px;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    hr.retro {
+      border: none;
+      border-top: 2px solid var(--border-darker);
+      border-bottom: 1px solid var(--border-light);
+      margin: 2px 0;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--surface);
+      padding: 10px;
+      text-align: center;
+      font-size: 11px;
+      color: #808080;
+    }
+    .best-viewed {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .badge {
+      color: white;
+      font-family: 'VT323', monospace;
+      font-size: 14px;
+      padding: 2px 8px;
+      border: 1px solid #808080;
+    }
+    .badge.ie       { background: #003399; }
+    .badge.netscape { background: #669900; }
+
+    ::-webkit-scrollbar { width: 16px; }
+    ::-webkit-scrollbar-track { background: var(--surface); }
+    ::-webkit-scrollbar-thumb {
+      background: var(--surface);
+      border: 1px solid;
+      border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .page { padding: 8px; gap: 8px; }
+
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 6px;
+        padding-bottom: 4px;
+      }
+      .sidebar .panel { flex-shrink: 0; min-width: 140px; }
+
+      .panel-body.menu-body {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2px;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .best-viewed { flex-direction: column; gap: 6px; }
+    }
+    /* BLOG CARDS */
+    .blog-card {
+      display: flex;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #e0e0e0;
+      text-decoration: none;
+      color: inherit;
+    }
+    .blog-card:last-child { border-bottom: none; }
+    .blog-card:hover { background: #f0f0f8; }
+    .blog-card-img {
+      width: 80px;
+      height: 60px;
+      object-fit: cover;
+      border: 1px solid #808080;
+      flex-shrink: 0;
+    }
+    .blog-card-img-placeholder {
+      width: 80px;
+      height: 60px;
+      background: #e8e8e8;
+      border: 1px dashed #808080;
+      flex-shrink: 0;
+    }
+    .blog-card-body { display: flex; flex-direction: column; gap: 4px; }
+    .blog-card-title { font-size: 13px; color: #0000ee; font-weight: bold; }
+    .blog-card-date  { font-size: 11px; color: #808080; }
+    .blog-card-summary { font-size: 12px; line-height: 1.6; color: #333; }
+    .blog-empty { font-size: 12px; color: #808080; }
+    /* UPDATES */
+    .update-item { font-size: 11px; padding: 3px 0; border-bottom: 1px dotted #aaa; line-height: 1.5; }
+    .update-item:last-child { border-bottom: none; }
+    .update-date { color: #808080; display: block; }
+    .update-text { color: #000; }
+    .update-empty { font-size: 11px; color: #808080; }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Marquee -->
+  <div class="marquee-bar raised">
+    <div class="marquee-inner">
+      ★ ようこそ！広野文治のホームページへ！ ★ &nbsp;&nbsp;&nbsp; WELCOME TO HIRONO BUNJI'S HOMEPAGE &nbsp;&nbsp;&nbsp; ★ ようこそ！広野文治のホームページへ！ ★ &nbsp;&nbsp;&nbsp; WELCOME TO HIRONO BUNJI'S HOMEPAGE &nbsp;&nbsp;&nbsp;
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero sunken">
+
+    <div class="hero-title">広野文治のホームページ</div>
+
+  </div>
+
+  <!-- Two column -->
+  <div class="two-col">
+
+    <div class="sidebar">
+      <div class="panel raised">
+        <div class="panel-title">メニュー</div>
+        <div class="panel-body menu-body">
+          <a class="menu-item" href="#">自己紹介</a>
+          <a class="menu-item" href="#">ブログ</a>
+        </div>
+      </div>
+
+      <div class="panel raised">
+        <div class="panel-title">更新情報</div>
+        <div class="panel-body" id="updates-list">
+          <p style="color:#808080; font-size:11px;">読み込み中...</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-col">
+      <div class="content-block sunken">
+        <h3>自己紹介</h3>
+        <p>吹奏楽部だったが、3年生になり引退した。高校で楽器を吹くのが楽しみだ。</p>
+        <br>
+        <p>好きな食べ物は、きな粉餅や、みかん、ホワイトチョコなどである。</p>
+        <br>
+        <p>友達の似顔絵を描くのが好きである。</p>
+      </div>
+
+      <div class="content-block sunken">
+        <h3>最新のブログ</h3>
+        <div id="blog-list"><p style="color:#808080; font-size:12px;">読み込み中...</p></div>
+      </div>
+
+
+
+
+    </div>
+
+  </div>
+
+  <hr class="retro">
+
+  <div class="footer raised">
+    <div>© 2026 広野文治. All Rights Reserved.</div>
+
+  </div>
+
+</div>
+
+
+<script>
+  fetch('updates.json')
+    .then(res => res.json())
+    .then(items => {
+      const container = document.getElementById('updates-list');
+      if (!items || items.length === 0) {
+        container.innerHTML = '<p class="update-empty">更新情報はありません。</p>';
+        return;
+      }
+      container.innerHTML = items.slice(0, 8).map(item => `
+        <div class="update-item">
+          <span class="update-date">${item.date}</span>
+          <span class="update-text">${item.text}</span>
+        </div>
+      `).join('');
+    })
+    .catch(() => {
+      document.getElementById('updates-list').innerHTML =
+        '<p class="update-empty">更新情報を取得できませんでした。</p>';
+    });
+
+  fetch('blog.json')
+    .then(res => res.json())
+    .then(posts => {
+      const container = document.getElementById('blog-list');
+      if (!posts || posts.length === 0) {
+        container.innerHTML = '<p class="blog-empty">まだ記事がありません。</p>';
+        return;
+      }
+      // 最新3件だけ表示
+      const recent = posts.slice(0, 3);
+      container.innerHTML = recent.map(post => `
+        <a class="blog-card" href="${post.url}">
+          ${post.image
+            ? `<img class="blog-card-img" src="${post.image}" alt="${post.title}">`
+            : `<div class="blog-card-img-placeholder"></div>`
+          }
+          <div class="blog-card-body">
+            <div class="blog-card-title">${post.title}</div>
+            <div class="blog-card-date">${post.date}</div>
+            <div class="blog-card-summary">${post.summary}</div>
+          </div>
+        </a>
+      `).join('');
+    })
+    .catch(() => {
+      document.getElementById('blog-list').innerHTML =
+        '<p class="blog-empty">ブログ記事が見つかりませんでした。</p>';
+    });
+</script>
+
+</body>
+</html>
