@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ↓ タイトルを書き換えること！ -->
+<title>寝たいが寝れないのは自分のせいだ。</title>
+
+<style>
+
+/* ===== 色の変数 index.htmlとおなじ ===== */
+:root {
+  --bg: #c0c0c0;
+  --surface: #d4d0c8;
+  --border-light: #ffffff;
+  --border-dark: #808080;
+  --border-darker: #404040;
+  --text: #000000;
+  --link: #0000ee;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  /* Macはヒラギノ、WindowsはメイリオかMS Gothic */
+  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', 'MS Gothic', sans-serif;
+  font-size: 13px;
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* 浮き出た枠 */
+.raised {
+  border: 2px solid;
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+}
+
+/* へこんだ枠 */
+.sunken {
+  border: 2px solid;
+  border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+}
+
+/* ページ全体のラッパー 真ん中寄せ */
+.page {
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ===== 上のサイト名とナビゲーション ===== */
+.site-header {
+  background: white;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;  /* スマホのとき折り返す */
+  gap: 8px;
+}
+.site-title {
+  font-family: 'Courier New', 'Lucida Console', monospace;
+  font-size: clamp(18px, 4vw, 28px);
+  color: #000080;
+  text-shadow: 1px 1px 0 #808080;
+  letter-spacing: 2px;
+  text-decoration: none;  /* リンクの下線消す */
+}
+.site-nav { display: flex; gap: 4px; flex-wrap: wrap; }
+
+/* ナビのボタン */
+.nav-link {
+  padding: 3px 10px;
+  background: var(--surface);
+  border: 2px solid;
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+  text-decoration: none;
+  color: var(--link);
+  font-size: 12px;
+}
+.nav-link:hover { background: #000080; color: white; }
+.nav-link:active {
+  /* クリックしたときへこむ */
+  border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+}
+
+/* ===== 記事エリア ===== */
+.article {
+  background: white;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* タイトルと日付 */
+.article-header {
+  border-bottom: 2px solid #000080;
+  padding-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.article-title { font-size: 18px; font-weight: bold; color: #000080; }
+.article-date  { font-size: 11px; color: #808080; }
+
+/* 本文エリア */
+.article-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  line-height: 1.9;
+}
+.article-body p { font-size: 13px; }
+
+/* ===== 画像 ===== */
+.article-img {
+  max-width: 100%;
+  border: 2px solid;
+  border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+  display: block;
+}
+/* 画像の下のキャプション */
+.article-img-caption {
+  font-size: 11px;
+  color: #808080;
+  margin-top: 4px;
+  text-align: center;
+}
+.img-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+/* 右寄せ 文章が左に回り込む */
+.img-block.right {
+  float: right;
+  margin: 0 0 10px 14px;
+  max-width: 260px;
+}
+/* 左寄せ 文章が右に回り込む */
+.img-block.left {
+  float: left;
+  margin: 0 14px 10px 0;
+  max-width: 260px;
+}
+/* floatのあとに必要なおまじない */
+.clearfix::after { content: ''; display: block; clear: both; }
+
+/* 区切り線 */
+hr.retro {
+  border: none;
+  border-top: 2px solid var(--border-darker);
+  border-bottom: 1px solid var(--border-light);
+  margin: 2px 0;
+}
+
+/* 戻るボタン */
+.back-link {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--surface);
+  border: 2px solid;
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+  text-decoration: none;
+  color: var(--link);
+  font-size: 12px;
+}
+.back-link:hover { background: #000080; color: white; }
+.back-link:active {
+  border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+}
+
+/* フッター */
+.footer {
+  background: var(--surface);
+  padding: 10px;
+  text-align: center;
+  font-size: 11px;
+  color: #808080;
+}
+
+/* スクロールバー */
+::-webkit-scrollbar { width: 16px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb {
+  background: var(--surface);
+  border: 1px solid;
+  border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
+}
+
+/* ===== スマホ対応 ===== */
+@media (max-width: 600px) {
+  .page { padding: 8px; gap: 8px; }
+  /* スマホのときは画像の回り込みをやめる */
+  .img-block.right, .img-block.left {
+    float: none;
+    margin: 0;
+    max-width: 100%;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- サイトヘッダー トップへのリンクとナビ -->
+  <!-- postsフォルダの中なので ../ でひとつ上に戻る -->
+  <div class="site-header sunken">
+    <a class="site-title" href="../index.html">広野文治のホームページ</a>
+    <nav class="site-nav">
+      <a class="nav-link" href="../index.html">トップ</a>
+      <a class="nav-link" href="../blog.html">ブログ</a>
+    </nav>
+  </div>
+
+  <!-- 記事本文 -->
+  <div class="article sunken">
+    <div class="article-header">
+      <!-- ↓↓ ここを書き換える ↓↓ -->
+      <div class="article-title">寝たいが寝ないのは自分のせいだ。</div>
+      <div class="article-date">2026-02-27</div>
+    </div>
+
+    <div class="article-body clearfix">
+
+      <!-- ===== ここから本文を書く ===== -->
+
+      <p>入試二週間前になった。受験直前だ。最近、僕は勉強している。でも、めちゃくちゃしているというわけではない。</p>
+      <p>一年前の今、僕は１年後どんな感じかわからなかった。２年生の僕は、受験のことなんて考えたことがなかった。</p>
+      <p>先輩が卒業した時、僕は、やばいと思った。受験が近づいていると思ったからだ。</p>
+      <p>でも、３年生になってから、２学期になるまで僕は何も受験勉強をしなかった。今、少しだけ後悔している。</p>
+      <p>でも、なんとかなりそうだからいいか。</p>
+      <p>行きたい高校の倍率が出た。思ったより高くて、やばいと思った。勉強しなきゃと思ったが、いつの間にか、もう二週間後に受験だった。</p>
+      <p>とにかく、今できることをしようと思った。とりあえず、買ってから何もやってない過去問集を片付けようか。</p>
+      <p>2週間後、実力を出せたらそれでいい。風邪を引いたら大変だ。怪我をしたら大変だ。注意して生活する。</p>
+      <p>受験のことばかり考えていたが、いろいろな終わりが近づいてきていることにやっと気づいた。</p>
+      <p>もうすぐ卒業なのに、実感がない。たとえば、その教科の最後の授業があったときに、これが義務教育で最後のその教科の授業だと感じることができなかった。</p>
+      <p>最近、学校で眠い。今年に入ってから、眠いのだ。理由は、夜更かしをしているから。なぜ夜更かしをしているのかというと、スマホを見たいからだ。</p>
+      <p>今日は早く寝ようと、いつも思うけど、結局夜更かしする。まあ、ええか。</p>
+    </div>
+  </div>
+
+  <!-- 戻るボタン -->
+  <div>
+    <a class="back-link" href="../blog.html">← ブログ一覧に戻る</a>
+  </div>
+
+  <hr class="retro">
+
+  <!-- フッター -->
+  <div class="footer raised">
+    <div>© 2026 広野文治. All Rights Reserved.</div>
+  </div>
+
+</div>
+
+</body>
+</html>
