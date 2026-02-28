@@ -1,408 +1,65 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>広野文治のホームページ</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サイト移転のお知らせ</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
 
-<style>
+        /* 点滅アニメーション */
+        .blink {
+            color: #ff0000;
+            font-size: 2rem;
+            font-weight: bold;
+            animation: blink 1s step-end infinite;
+        }
 
-/* ===== 色とかの変数 まとめておくと後で変えやすい ===== */
-:root {
-  --bg: #a8d8ea;         /* 背景 水色 */
-  --surface: #cceeff;    /* パネルとか 薄い水色 */
-  --border-light: #e8f8ff;
-  --border-dark: #5599bb;
-  --border-darker: #226688;
-  --text: #000000;
-  --link: #0000cc;
-  --accent: #005580;     /* 濃い青 タイトルバーとか */
-}
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+        .new-link {
+            margin: 20px 0;
+            font-size: 1.2rem;
+        }
 
-body {
-  /* Macはヒラギノ、WindowsはメイリオかMS Gothic */
-  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', 'MS Gothic', sans-serif;
-  font-size: 13px;
-  color: var(--text);
-  min-height: 100vh;
+        /* 移動ボタンのスタイル */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
 
-  /* 星のパターン背景 SVGをインラインで書いてる */
-  background-color: #a8d8ea;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ctext x='8' y='32' font-size='26' fill='%2387c8e0' opacity='0.7'%3E%E2%98%85%3C/text%3E%3Ctext x='38' y='56' font-size='16' fill='%2387c8e0' opacity='0.5'%3E%E2%98%86%3C/text%3E%3C/svg%3E");
-}
-
-/* Win98っぽい浮き出た枠線 */
-.raised {
-  border: 2px solid;
-  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
-}
-
-/* 逆にへこんだ枠線 */
-.sunken {
-  border: 2px solid;
-  border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
-}
-
-/* 全体のラッパー 真ん中寄せ */
-.page {
-  max-width: 860px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* ===== 上の流れるやつ ===== */
-.marquee-bar {
-  background: #005580;   /* 濃い青 */
-  color: #ffffff;        /* 白い文字 */
-  padding: 5px 0;
-  overflow: hidden;      /* はみ出た部分を隠す */
-}
-.marquee-inner {
-  display: inline-block;
-  white-space: nowrap;
-  font-family: 'Courier New', 'Lucida Console', monospace;
-  font-size: 17px;
-  letter-spacing: 2px;
-  animation: marquee 18s linear infinite; /* ずっとループ */
-}
-@keyframes marquee {
-  from { transform: translateX(100vw); }  /* 右から */
-  to   { transform: translateX(-100%); }  /* 左へ */
-}
-
-/* ===== でかいタイトルエリア ===== */
-.hero {
-  background: white;
-  padding: 24px 16px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-.hero-title {
-  font-family: 'Courier New', 'Lucida Console', monospace;
-  font-size: clamp(22px, 5vw, 40px); /* 画面幅に合わせて変わる */
-  color: #005580;
-  text-shadow: 2px 2px 0 #808080;   /* 影 */
-  letter-spacing: 4px;
-}
-
-/* ===== 2カラムのレイアウト ===== */
-.two-col {
-  display: grid;
-  grid-template-columns: 190px 1fr; /* 左:固定幅 右:残り全部 */
-  gap: 10px;
-  align-items: start; /* 上揃え */
-}
-
-/* ===== 左サイドバー ===== */
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* サイドバーの各パネル */
-.panel { background: var(--surface); }
-.panel-title {
-  background: #005580;
-  color: white;
-  padding: 3px 8px;
-  font-size: 12px;
-  font-weight: bold;
-}
-.panel-body {
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-/* メニューのリンク */
-.menu-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 6px;
-  text-decoration: none;
-  color: var(--link);
-  font-size: 13px;
-}
-.menu-item::before { content: '▶'; font-size: 8px; color: #808080; } /* 先頭の三角 */
-.menu-item:hover { background: #005580; color: white; }
-.menu-item:hover::before { color: #aaddff; }
-
-/* 更新情報の各アイテム */
-.update-item {
-  font-size: 11px;
-  padding: 3px 0;
-  border-bottom: 1px dotted #aaa;
-  line-height: 1.5;
-}
-.update-item:last-child { border-bottom: none; }
-.update-date { color: #808080; display: block; }
-.update-text { color: #000; }
-.update-empty { font-size: 11px; color: #808080; }
-
-/* ===== 右のメインエリア ===== */
-.main-col {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* コンテンツの白いブロック */
-.content-block {
-  background: white;
-  padding: 10px 14px;
-  min-height: 80px;
-}
-.content-block h3 {
-  font-size: 13px;
-  color: #005580;
-  border-bottom: 1px solid #5599bb;
-  padding-bottom: 4px;
-  margin-bottom: 8px;
-}
-.content-block p {
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-/* ===== ブログカード（最新のブログ欄） ===== */
-.blog-card {
-  display: flex;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid #e0e0e0;
-  text-decoration: none;
-  color: inherit;
-}
-.blog-card:last-child { border-bottom: none; }
-.blog-card:hover { background: #f0f0f8; }
-
-/* サムネイル画像 */
-.blog-card-img {
-  width: 80px;
-  height: 60px;
-  object-fit: cover;
-  border: 1px solid #808080;
-  flex-shrink: 0;
-}
-/* 画像がないときのグレーの箱 */
-.blog-card-img-placeholder {
-  width: 80px;
-  height: 60px;
-  background: #e8e8e8;
-  border: 1px dashed #808080;
-  flex-shrink: 0;
-}
-.blog-card-body { display: flex; flex-direction: column; gap: 4px; }
-.blog-card-title { font-size: 13px; color: #0000ee; font-weight: bold; }
-.blog-card-date  { font-size: 11px; color: #808080; }
-.blog-card-summary { font-size: 12px; line-height: 1.6; color: #333; }
-.blog-empty { font-size: 12px; color: #808080; }
-
-/* ===== 区切り線 ===== */
-hr.retro {
-  border: none;
-  border-top: 2px solid var(--border-darker);
-  border-bottom: 1px solid var(--border-light);
-  margin: 2px 0;
-}
-
-/* ===== フッター ===== */
-.footer {
-  background: var(--surface);
-  padding: 10px;
-  text-align: center;
-  font-size: 11px;
-  color: #808080;
-}
-
-/* スクロールバーもレトロに */
-::-webkit-scrollbar { width: 16px; }
-::-webkit-scrollbar-track { background: var(--surface); }
-::-webkit-scrollbar-thumb {
-  background: var(--surface);
-  border: 1px solid;
-  border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
-}
-
-/* ===== スマホ対応 600px以下 ===== */
-@media (max-width: 600px) {
-  .page { padding: 8px; gap: 8px; }
-
-  /* 2カラム→1カラムに */
-  .two-col { grid-template-columns: 1fr; }
-
-  /* サイドバーを横並びにして横スクロール */
-  .sidebar {
-    flex-direction: row;
-    overflow-x: auto;
-    gap: 6px;
-    padding-bottom: 4px;
-  }
-  .sidebar .panel { flex-shrink: 0; min-width: 140px; }
-
-  .panel-body.menu-body {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 2px;
-  }
-}
-
-</style>
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 
-<div class="page">
+    <div class="blink">ドメイン移行のお知らせ！！</div>
 
-  <!-- 流れるやつ -->
-  <div class="marquee-bar raised">
-    <div class="marquee-inner">
-      ★ ようこそ！広野文治のホームページへ！ ★ &nbsp;&nbsp;&nbsp; WELCOME TO HIRONO BUNJI'S HOMEPAGE &nbsp;&nbsp;&nbsp; ★ ようこそ！広野文治のホームページへ！ ★ &nbsp;&nbsp;&nbsp; WELCOME TO HIRONO BUNJI'S HOMEPAGE &nbsp;&nbsp;&nbsp;
+    <div class="new-link">
+        新しいURL：<a href="https://hironobunji.jp">https://hironobunji.jp</a>
     </div>
-  </div>
 
-  <!-- タイトルのでかいやつ -->
-  <div class="hero sunken">
-    <div class="hero-title">広野文治のホームページ</div>
-  </div>
-
-  <!-- 2カラムレイアウト ここから -->
-  <div class="two-col">
-
-    <!-- 左サイドバー -->
-    <div class="sidebar">
-
-      <!-- プロフィール画像 メニューの上に表示 -->
-      <div class="panel raised">
-        <div class="panel-body" style="align-items: center; text-align: center; gap: 6px;">
-          <!-- image/Purofiru.gif を使う 500x500の画像 -->
-          <img src="image/Purofiru.gif" alt="プロフィール画像"
-            style="width: 100%; max-width: 170px; aspect-ratio: 1/1; object-fit: cover; border: 2px solid var(--border-dark); display: block; margin: 0 auto;">
-          <p style="font-size: 11px; line-height: 1.6; margin-top: 4px;">ユーフォニアムをします</p>
-        </div>
-      </div>
-
-      <!-- メニュー -->
-      <div class="panel raised">
-        <div class="panel-title">メニュー</div>
-        <div class="panel-body menu-body">
-          <a class="menu-item" href="#">自己紹介</a>
-          <a class="menu-item" href="blog.html">ブログ</a>
-        </div>
-      </div>
-
-      <!-- 更新情報 JSONから読み込む -->
-      <div class="panel raised">
-        <div class="panel-title">更新情報</div>
-        <div class="panel-body" id="updates-list">
-          <p style="color:#808080; font-size:11px;">読み込み中...</p>
-        </div>
-      </div>
-
-    </div>
-    <!-- サイドバーここまで -->
-
-    <!-- 右メインエリア -->
-    <div class="main-col">
-
-      <!-- 自己紹介 -->
-      <div class="content-block sunken">
-        <h3>自己紹介</h3>
-        <p>吹奏楽部だったが、3年生になり引退した。高校で楽器を吹くのが楽しみだ。</p>
-        <br>
-        <p>好きな食べ物は、きな粉餅や、みかん、ホワイトチョコなどである。</p>
-        <br>
-        <p>友達の似顔絵を描くのが好きである。</p>
-      </div>
-
-      <!-- 最新ブログ JSONから読み込む（最新3件） -->
-      <div class="content-block sunken">
-        <h3>最新のブログ</h3>
-        <div id="blog-list"><p style="color:#808080; font-size:12px;">読み込み中...</p></div>
-      </div>
-
-    </div>
-    <!-- メインエリアここまで -->
-
-  </div>
-  <!-- 2カラムここまで -->
-
-
-  <div class="footer raised">
-    <div>© 2026 広野文治. All Rights Reserved.</div>
-  </div>
-
-</div>
-
-
-<script>
-
-// ===== 更新情報を updates.json から読み込む =====
-fetch('updates.json')
-  .then(res => res.json())
-  .then(items => {
-    const container = document.getElementById('updates-list');
-    if (!items || items.length === 0) {
-      container.innerHTML = '<p class="update-empty">更新情報はありません。</p>';
-      return;
-    }
-    // 最大8件表示
-    container.innerHTML = items.slice(0, 8).map(item => `
-      <div class="update-item">
-        <span class="update-date">${item.date}</span>
-        <span class="update-text">${item.text}</span>
-      </div>
-    `).join('');
-  })
-  .catch(() => {
-    // 読み込み失敗したとき
-    document.getElementById('updates-list').innerHTML =
-      '<p class="update-empty">更新情報を取得できませんでした。</p>';
-  });
-
-
-// ===== ブログ記事を blog.json から読み込む =====
-fetch('blog.json')
-  .then(res => res.json())
-  .then(posts => {
-    const container = document.getElementById('blog-list');
-    if (!posts || posts.length === 0) {
-      container.innerHTML = '<p class="blog-empty">まだ記事がありません。</p>';
-      return;
-    }
-    // 最新3件だけ表示
-    container.innerHTML = posts.slice(0, 3).map(post => `
-      <a class="blog-card" href="${post.url}">
-        ${post.image
-          ? `<img class="blog-card-img" src="${post.image}" alt="${post.title}">`
-          : `<div class="blog-card-img-placeholder"></div>`
-        }
-        <div class="blog-card-body">
-          <div class="blog-card-title">${post.title}</div>
-          <div class="blog-card-date">${post.date}</div>
-          <div class="blog-card-summary">${post.summary}</div>
-        </div>
-      </a>
-    `).join('');
-  })
-  .catch(() => {
-    // 読み込み失敗したとき
-    document.getElementById('blog-list').innerHTML =
-      '<p class="blog-empty">ブログ記事が見つかりませんでした。</p>';
-  });
-
-</script>
+    <a href="https://hironobunji.jp" class="btn">新しいサイトへ移動する</a>
 
 </body>
 </html>
