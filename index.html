@@ -2,64 +2,27 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>サイト移転のお知らせ</title>
+    <title>移転のお知らせ</title>
     <style>
-        body {
-            font-family: sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-            background-color: #f9f9f9;
-        }
-
-        /* 点滅アニメーション */
+        /* 点滅の動き */
         .blink {
-            color: #ff0000;
-            font-size: 2rem;
+            color: red;
             font-weight: bold;
             animation: blink 1s step-end infinite;
         }
-
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
-        .new-link {
-            margin: 20px 0;
-            font-size: 1.2rem;
-        }
-
-        /* 移動ボタンのスタイル */
-        .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            color: #fff;
-            background-color: #007bff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
-        }
+        @keyframes blink { 50% { opacity: 0; } }
+        
+        body { text-align: center; padding-top: 50px; font-family: sans-serif; }
+        .btn { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
     </style>
 </head>
 <body>
 
     <div class="blink">ドメイン移行のお知らせ！！</div>
 
-    <div class="new-link">
-        新しいURL：<a href="https://hironobunji.jp">https://hironobunji.jp</a>
-    </div>
+    <p>新URL: <a href="https://hironobunji.jp">https://hironobunji.jp</a></p>
 
-    <a href="https://hironobunji.jp" class="btn">新しいサイトへ移動する</a>
+    <a href="https://hironobunji.jp" class="btn">新しいサイトへ移動</a>
 
 </body>
 </html>
