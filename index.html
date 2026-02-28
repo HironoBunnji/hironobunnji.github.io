@@ -4,25 +4,22 @@
     <meta charset="UTF-8">
     <title>移転のお知らせ</title>
     <style>
-        /* 点滅の動き */
+        body { text-align: center; padding-top: 100px; font-family: sans-serif; }
         .blink {
             color: red;
+            font-size: 24px;
             font-weight: bold;
             animation: blink 1s step-end infinite;
         }
         @keyframes blink { 50% { opacity: 0; } }
-        
-        body { text-align: center; padding-top: 50px; font-family: sans-serif; }
-        .btn { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+        .link { margin-top: 20px; display: block; font-size: 18px; }
     </style>
 </head>
 <body>
 
     <div class="blink">ドメイン移行のお知らせ！！</div>
 
-    <p>新URL: <a href="http://hironobunji.jp">http://hironobunji.jp</a></p>
-
-    <a href="https://hironobunji.jp" class="btn">新しいサイトへ移動</a>
+    <a href="http://hironobunji.jp" class="link">新サイト：http://hironobunji.jp</a>
 
 </body>
 </html>
